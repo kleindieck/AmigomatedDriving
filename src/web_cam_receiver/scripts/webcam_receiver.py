@@ -64,6 +64,17 @@ def WebcamReceiver():
         #        rospy.loginfo(hello_str)
         #        pub.publish(hello_str)
         frame = ip_cam.get_frame()
+
+        
+        gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)        
+        gray = np.float32(gray)
+        dst = cv2.cornerHarris(gray,2,3,0.04)
+        
+        #result is dilated for marking the corners, not important
+        dst = cv2.dilate(dst,None)
+        
+        # Threshold for an optimal value, it may vary depending on the image.
+        frame[dst>0.01*dst.max()]=[0,0,255]
         ros_frame = bridge.cv2_to_imgmsg(frame, "bgr8")
         # Display the resulting frame
         #cv2.imshow('frame',frame)

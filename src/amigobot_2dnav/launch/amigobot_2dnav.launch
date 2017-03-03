@@ -1,7 +1,7 @@
 <launch>
 
   <!-- Run the map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find amigobot_2dnav)/office_final.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find amigobot_2dnav)/office_test8.yaml"/>
 
   <!--- Run AMCL -->
   <include file="$(find amigobot_2dnav)/launch/amcl_omni.launch" />
